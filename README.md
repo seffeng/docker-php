@@ -1,13 +1,20 @@
-# Docker Alpine Nginx
+# Docker Alpine PHP
 
-常用命令：
+## 环境
+
+```
+alpine: ^3.11
+php: 7.3.13
+```
+
+## 常用命令：
 
 ```sh
 # 拉取镜像
-$ docker pull seffeng/nginx
+$ docker pull seffeng/php
 
-# 运行
-$ docker run --name nginx-test -d -p 80:80 -p 443:443 -v <html-dir>:/opt/websrv/data/wwwroot -v <conf-dir>:/opt/websrv/config/nginx/conf.d -v <cert-dir>:/opt/websrv/config/nginx/certs.d -v <log-dir>:/opt/websrv/logs <tmp-dir>:/opt/websrv/tmp seffeng/nginx
+# 运行；若配合 nginx 使用，，注意 <html-dir> 和 <tmp-dir> 与 nginx 一致
+$ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp seffeng/php
 
 # 查看正在运行的容器
 $ docker ps
@@ -30,4 +37,3 @@ $ docker images
 # 删除镜像
 $ docker rmi [IMAGE ID]
 ```
-
