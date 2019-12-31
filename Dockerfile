@@ -37,7 +37,7 @@ COPY    conf ./conf
 RUN apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
  wget ${PHP_URL} &&\
  tar -jxf ${PHP_VERSION}.tar.bz2 &&\
- mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d ${CONFIG_DIR}/log &&\
+ mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
  addgroup wwww && adduser -H -D -G wwww www &&\
  cd ${PHP_VERSION} &&\
  ${CONFIGURE} &&\
@@ -46,14 +46,14 @@ RUN apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
  ln -s ${INSTALL_DIR}/bin/phpize /usr/bin/phpize &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
  echo -e "#!/bin/sh\n${INSTALL_DIR}/sbin/php-fpm -F -y ${CONFIG_DIR}/php-fpm.conf \$1" > ${CONFIG_DIR}/start.sh &&\
- echo -e "#/bin/sh/\nkill -INT  \`cat ${CONFIG_DIR}/logs/php-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
- echo -e "#/bin/sh/\nkill -USR2  \`cat ${CONFIG_DIR}/logs/php-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
+ echo -e "#/bin/sh/\nkill -INT  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
+ echo -e "#/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
  chmod +x ${CONFIG_DIR}/start.sh ${CONFIG_DIR}/stop.sh ${CONFIG_DIR}/reload.sh &&\
  ln -s ${CONFIG_DIR}/start.sh /usr/bin/php-fpm &&\
  apk del ${BASE_PACKAGE} &&\
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
-VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/wwwroot"]
+VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/wwwroot", "${BASE_DIR}/logs"]
 
 CMD ["php-fpm", "-F"]

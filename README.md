@@ -14,7 +14,7 @@ php: 7.3.13
 $ docker pull seffeng/php
 
 # 运行；若配合 nginx 使用，，注意 <html-dir> 和 <tmp-dir> 与 nginx 一致
-$ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp seffeng/php
+$ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
 
 # 查看正在运行的容器
 $ docker ps
