@@ -9,7 +9,7 @@ ENV PHP_VERSION=php-7.3.13\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
  BASE_PACKAGE="gcc g++ make file autoconf"\
- EXTEND="patch gzip freetype-dev bzip2 libcurl libxml2-dev curl-dev libjpeg-turbo-dev libpng-dev libevent-dev openssl-dev"
+ EXTEND="patch gzip freetype-dev bzip2 libcurl libxml2-dev curl-dev libjpeg-turbo-dev libpng-dev libevent-dev bison re2c openssl-dev"
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="http://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -31,7 +31,11 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-png-dir\
  --with-curl\
  --with-openssl\
- --with-zlib"
+ --with-mysqli=mysqlnd\
+ --with-pdo-mysql=mysqlnd\
+ --with-zlib\
+ --without-pear\
+ --disable-phar"
 
 WORKDIR /tmp
 COPY    conf ./conf
