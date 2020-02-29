@@ -4,7 +4,7 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.3.13\
+ENV PHP_VERSION=php-7.1.33\
  REDIS_EXT_VERSION=redis-5.1.1\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
