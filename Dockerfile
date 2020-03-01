@@ -63,7 +63,7 @@ RUN \
  ${INSTALL_DIR}/bin/phpize &&\
  ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
  make && make install &&\
- echo -e "; redis extension ;\nextension=redis" > ${CONFIG_DIR}/conf.d/redis.ini &&\
+ echo -e "; redis extension ;\nextension=redis.so" > ${CONFIG_DIR}/conf.d/redis.ini &&\
  cd /tmp && apk del ${BASE_PACKAGE} &&\
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
