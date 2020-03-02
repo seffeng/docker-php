@@ -4,7 +4,7 @@
 
 ```
 alpine: ^3.11
-php: 7.3.13
+php: 7.3.15
 ```
 
 ## 常用命令：
@@ -15,6 +15,9 @@ $ docker pull seffeng/php
 
 # 运行；若配合 nginx 使用，注意 <html-dir> 和 <tmp-dir> 与 nginx 一致
 $ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
+
+# 例子，--link 用于通过别名链接对应的 redis 和 mysql ：
+$ docker run --name php-73-alias1 --link redis-alias1 --link mysql-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.3:/opt/websrv/logs seffeng/php
 
 # 查看正在运行的容器
 $ docker ps

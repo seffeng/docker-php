@@ -4,7 +4,7 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.3.13\
+ENV PHP_VERSION=php-7.3.15\
  REDIS_EXT_VERSION=redis-5.1.1\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
@@ -55,8 +55,8 @@ RUN \
  ln -s ${INSTALL_DIR}/bin/phpize /usr/bin/phpize &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
  echo -e "#!/bin/sh\n${INSTALL_DIR}/sbin/php-fpm -F -y ${CONFIG_DIR}/php-fpm.conf \$1" > ${CONFIG_DIR}/start.sh &&\
- echo -e "#/bin/sh/\nkill -INT  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
- echo -e "#/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
+ echo -e "#/bin/sh/\nkill -INT  \`cat ${BASE_DIR}/tmp/php73-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
+ echo -e "#/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php73-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
  chmod +x ${CONFIG_DIR}/start.sh ${CONFIG_DIR}/stop.sh ${CONFIG_DIR}/reload.sh &&\
  ln -s ${CONFIG_DIR}/start.sh /usr/bin/php-fpm &&\
  cd /tmp/${REDIS_EXT_VERSION} &&\
