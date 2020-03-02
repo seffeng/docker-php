@@ -8,8 +8,8 @@ ENV PHP_VERSION=php-7.4.3\
  REDIS_EXT_VERSION=redis-5.1.1\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
- BASE_PACKAGE="gcc g++ make file autoconf patch gzip freetype-dev bzip2 curl-dev libevent-dev bison re2c openssl-dev"\
- EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev"
+ BASE_PACKAGE="gcc g++ make file autoconf patch gzip freetype-dev curl-dev libevent-dev bison re2c openssl-dev"\
+ EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev "
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="http://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -26,9 +26,9 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --enable-sockets\
  --enable-bcmath\
  --enable-exif\
- --with-gd\
- --with-jpeg-dir\
- --with-png-dir\
+ --enable-gd\
+ --with-bz2\
+ --with-jpeg\
  --with-curl\
  --with-openssl\
  --with-mysqli=mysqlnd\
