@@ -34,8 +34,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-mysqli=mysqlnd\
  --with-pdo-mysql=mysqlnd\
  --with-zlib\
- --without-pear\
- --disable-phar"
+ --with-pear"
 
 WORKDIR /tmp
 COPY    conf ./conf
@@ -46,7 +45,7 @@ RUN \
  tar -jxf ${PHP_VERSION}.tar.bz2 &&\
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
- mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
+ mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
  addgroup wwww && adduser -H -D -G wwww www &&\
  cd ${PHP_VERSION} &&\
  ${CONFIGURE} &&\
