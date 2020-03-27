@@ -16,7 +16,7 @@ $ docker pull seffeng/php
 # 运行；若配合 nginx 使用，注意 <html-dir> 和 <tmp-dir> 与 nginx 一致
 $ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
 
-# 完整示例，--link 用于通过别名链接对应的 redis 和 mysql ：
+# 完整示例，可参考备注 ：
 $ docker run --name php-74-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.4:/opt/websrv/logs seffeng/php:7.4
 
 # 查看正在运行的容器
