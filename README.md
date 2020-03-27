@@ -4,7 +4,7 @@
 
 ```
 alpine: ^3.11
-php: 7.4.3
+php: 7.4.4
 ```
 
 ## 常用命令：
@@ -58,7 +58,7 @@ $ docker network create [NAME]
 ## 1、添加网络[已存在则跳过此步骤]
 $ docker network create network-01
 
-## 运行容器增加 --network network-01 --network-alias name-net-alias
+## 运行容器增加 --network network-01 --network-alias [name-net-alias]
 $ docker run --name php-74-alias1 --network network-01 --network-alias php-74-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.4:/opt/websrv/logs seffeng/php:7.4
 ```
 
