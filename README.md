@@ -4,7 +4,7 @@
 
 ```
 alpine: ^3.11
-php: 7.2.28
+php: 7.2.29
 ```
 
 ## 常用命令：
@@ -16,8 +16,8 @@ $ docker pull seffeng/php
 # 运行；若配合 nginx 使用，注意 <html-dir> 和 <tmp-dir> 与 nginx 一致
 $ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
 
-# 完整示例，--link 用于通过别名链接对应的 redis 和 mysql ：
-$ docker run --name php-72-alias1 --link redis-alias1 --link mysql-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.2:/opt/websrv/logs seffeng/php:7.2
+# 完整示例，可参考备注 ：
+$ docker run --name php-72-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.2:/opt/websrv/logs seffeng/php:7.2
 
 # 查看正在运行的容器
 $ docker ps
@@ -39,4 +39,14 @@ $ docker images
 
 # 删除镜像
 $ docker rmi [IMAGE ID]
+```
+#### 备注
+
+```shell
+# 建议容器之间使用网络互通
+## 1、添加网络[已存在则跳过此步骤]
+$ docker network create network-01
+
+## 运行容器增加 --network network-01 --network-alias [name-net-alias]
+$ docker run --name php-72-alias1 --network network-01 --network-alias php-72-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.2:/opt/websrv/logs seffeng/php:7.2
 ```

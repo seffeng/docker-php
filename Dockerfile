@@ -4,8 +4,8 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.2.28\
- REDIS_EXT_VERSION=redis-5.1.1\
+ENV PHP_VERSION=php-7.2.29\
+ REDIS_EXT_VERSION=redis-5.2.1\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip freetype-dev bzip2 curl-dev libevent-dev bison re2c openssl-dev"\
