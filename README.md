@@ -48,5 +48,5 @@ $ docker rmi [IMAGE ID]
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name php-73-alias1 --hostname php-73-host --network network-01 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.3:/opt/websrv/logs seffeng/php
+$ docker run --name php-73-alias1 --network network-01 --network-alias php-73-net1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.3:/opt/websrv/logs seffeng/php
 ```
