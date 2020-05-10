@@ -20,22 +20,23 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-fpm-group=wwww\
  --with-config-file-path=${CONFIG_DIR}\
  --with-config-file-scan-dir=${CONFIG_DIR}/conf.d\
+ --enable-bcmath\
+ --enable-exif\
  --enable-ftp\
  --enable-mbstring\
  --enable-mysqlnd\
+ --enable-pcntl\
  --enable-sockets\
- --enable-bcmath\
- --enable-exif\
+ --with-curl\
  --with-gd\
  --with-jpeg-dir\
- --with-png-dir\
- --with-curl\
- --with-openssl\
  --with-mysqli=mysqlnd\
+ --with-openssl\
  --with-pdo-mysql=mysqlnd\
+ --with-pear\
+ --with-png-dir\
  --with-zip\
- --with-zlib\
- --with-pear"
+ --with-zlib"
 
 WORKDIR /tmp
 COPY    conf ./conf
