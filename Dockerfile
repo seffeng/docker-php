@@ -4,12 +4,12 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.4.4\
- REDIS_EXT_VERSION=redis-5.2.1\
+ENV PHP_VERSION=php-7.4.5\
+ REDIS_EXT_VERSION=redis-5.2.2\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip freetype-dev curl-dev libevent-dev bison re2c openssl-dev"\
- EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev "
+ EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev"
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="http://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -20,21 +20,23 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-fpm-group=wwww\
  --with-config-file-path=${CONFIG_DIR}\
  --with-config-file-scan-dir=${CONFIG_DIR}/conf.d\
- --enable-ftp\
- --enable-mbstring\
- --enable-mysqlnd\
- --enable-sockets\
  --enable-bcmath\
  --enable-exif\
+ --enable-ftp\
  --enable-gd\
+ --enable-mbstring\
+ --enable-mysqlnd\
+ --enable-pcntl\
+ --enable-sockets\
  --with-bz2\
- --with-jpeg\
  --with-curl\
- --with-openssl\
+ --with-jpeg\
  --with-mysqli=mysqlnd\
+ --with-openssl\
  --with-pdo-mysql=mysqlnd\
- --with-zlib\
- --with-pear"
+ --with-pear\
+ --with-zip\
+ --with-zlib"
 
 WORKDIR /tmp
 COPY    conf ./conf
