@@ -28,6 +28,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --enable-mysqlnd\
  --enable-pcntl\
  --enable-sockets\
+ --enable-zip\
  --with-bz2\
  --with-curl\
  --with-jpeg\
@@ -35,7 +36,6 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
  --with-pear\
- --with-zip\
  --with-zlib"
 
 WORKDIR /tmp
