@@ -1,5 +1,15 @@
 # Docker Alpine PHP
 
+# 版本说明
+
+* [7.3.17](https://github.com/seffeng/docker-php/tree/7.3) , [latest](https://github.com/seffeng/docker-php)
+
+* [7.4.5](https://github.com/seffeng/docker-php/tree/7.4)
+
+* [7.2.30](https://github.com/seffeng/docker-php/tree/7.2)
+
+* [7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
+
 ## 环境
 
 ```
