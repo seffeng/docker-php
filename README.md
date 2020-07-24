@@ -3,8 +3,8 @@
 ## 环境
 
 ```
-alpine: ^3.11
-php: 7.4.5
+alpine: ^3.12
+php: 7.4.8
 ```
 
 ## 常用命令：
@@ -39,6 +39,12 @@ $ docker images
 
 # 删除镜像
 $ docker rmi [IMAGE ID]
+
+# 复制本机文件到容器
+$ docker cp /root/file [CONTAINER ID]:/root/file
+
+# 复制容器文件到本机
+$ docker cp [CONTAINER ID]:/root/file /root/file
 ```
 
 #### 网络
