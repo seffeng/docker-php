@@ -2,19 +2,19 @@
 
 # 版本说明
 
-* [7.3.17](https://github.com/seffeng/docker-php/tree/7.3) , [latest](https://github.com/seffeng/docker-php)
+* [7.3.20](https://github.com/seffeng/docker-php/tree/7.3) , [latest](https://github.com/seffeng/docker-php)
 
-* [7.4.5](https://github.com/seffeng/docker-php/tree/7.4)
+* [7.4.8](https://github.com/seffeng/docker-php/tree/7.4)
 
-* [7.2.30](https://github.com/seffeng/docker-php/tree/7.2)
+* [7.2.32](https://github.com/seffeng/docker-php/tree/7.2)
 
 * [7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
 
 ## 环境
 
 ```
-alpine: ^3.11
-php: 7.3.17
+alpine: ^3.12
+php: 7.3.20
 ```
 
 ## 常用命令：
@@ -49,6 +49,12 @@ $ docker images
 
 # 删除镜像
 $ docker rmi [IMAGE ID]
+
+# 复制本机文件到容器
+$ docker cp /root/file [CONTAINER ID]:/root/file
+
+# 复制容器文件到本机
+$ docker cp [CONTAINER ID]:/root/file /root/file
 ```
 #### 备注
 
