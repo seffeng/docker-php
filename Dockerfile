@@ -4,13 +4,13 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.4.8\
- REDIS_EXT_VERSION=redis-5.3.1\
+ENV PHP_VERSION=php-7.4.14\
+ REDIS_EXT_VERSION=redis-5.3.2\
  LIBICONV_VERSION=libiconv-1.16\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
- BASE_PACKAGE="gcc g++ make file autoconf patch gzip freetype-dev curl-dev libevent-dev bison re2c openssl-dev"\
- EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev"
+ BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev"\
+ EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -33,6 +33,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --enable-zip\
  --with-bz2\
  --with-curl\
+ --with-freetype\
  --with-iconv=/usr/local\
  --with-jpeg\
  --with-mysqli=mysqlnd\
@@ -51,14 +52,23 @@ RUN \
  tar -jxf ${PHP_VERSION}.tar.bz2 &&\
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
+ ############################################################
+ # apk add
+ ############################################################
  apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
  mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
  addgroup wwww && adduser -H -D -G wwww www &&\
+ ############################################################
+ # install libiconv
+ ############################################################
  cd ${LIBICONV_VERSION} &&\
  ./configure --prefix=/usr/local &&\
  make && make install &&\
  if [ -f /usr/bin/iconv ] ; then (rm -rf /usr/bin/iconv) fi &&\
  ln -s /usr/local/bin/iconv /usr/bin/iconv &&\
+ ############################################################
+ # install php
+ ############################################################
  cd /tmp/${PHP_VERSION} &&\
  ${CONFIGURE} &&\
  make && make install &&\
@@ -70,11 +80,15 @@ RUN \
  echo -e "#/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php74-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
  chmod +x ${CONFIG_DIR}/start.sh ${CONFIG_DIR}/stop.sh ${CONFIG_DIR}/reload.sh &&\
  ln -s ${CONFIG_DIR}/start.sh /usr/bin/php-fpm &&\
+ ############################################################
+ # install redis ext
+ ############################################################
  cd /tmp/${REDIS_EXT_VERSION} &&\
  ${INSTALL_DIR}/bin/phpize &&\
  ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
  make && make install &&\
  echo -e "; redis extension ;\nextension=redis" > ${CONFIG_DIR}/conf.d/redis.ini &&\
+ ############################################################
  cd /tmp && apk del ${BASE_PACKAGE} &&\
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
