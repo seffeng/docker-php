@@ -2,11 +2,13 @@
 
 # 版本说明
 
-* [7.3.20](https://github.com/seffeng/docker-php/tree/7.3) , [latest](https://github.com/seffeng/docker-php)
+* [8.0.1](https://github.com/seffeng/docker-php/tree/8.0)
 
-* [7.4.8](https://github.com/seffeng/docker-php/tree/7.4)
+* [7.4.14](https://github.com/seffeng/docker-php/tree/7.4) , [latest](https://github.com/seffeng/docker-php)
 
-* [7.2.32](https://github.com/seffeng/docker-php/tree/7.2)
+* [7.3.26](https://github.com/seffeng/docker-php/tree/7.3)
+
+* [7.2.34](https://github.com/seffeng/docker-php/tree/7.2)
 
 * [7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
 
@@ -14,7 +16,7 @@
 
 ```
 alpine: ^3.12
-php: 7.3.20
+php: 7.4.14
 ```
 
 ## 常用命令：
@@ -27,7 +29,7 @@ $ docker pull seffeng/php
 $ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
 
 # 完整示例，可参考备注
-$ docker run --name php-73-alias1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.3:/opt/websrv/logs seffeng/php
+$ docker run --name php-alias1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php:/opt/websrv/logs seffeng/php
 
 # 查看正在运行的容器
 $ docker ps
@@ -64,5 +66,5 @@ $ docker cp [CONTAINER ID]:/root/file /root/file
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name php-73-alias1 --network network-01 --network-alias php-73-net1 -d -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/php/7.3:/opt/websrv/logs seffeng/php
+$ docker run --name php-alias1 --network network-01 --network-alias php-net1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php:/opt/websrv/logs seffeng/php
 ```
