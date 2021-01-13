@@ -4,7 +4,7 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.4.14\
+ENV PHP_VERSION=php-8.0.1\
  REDIS_EXT_VERSION=redis-5.3.2\
  LIBICONV_VERSION=libiconv-1.16\
  CONFIG_DIR="${BASE_DIR}/config/php"\
@@ -30,7 +30,6 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --enable-mysqlnd\
  --enable-pcntl\
  --enable-sockets\
- --enable-zip\
  --with-bz2\
  --with-curl\
  --with-freetype\
@@ -40,6 +39,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
  --with-pear\
+ --with-zip\
  --with-zlib"
 
 WORKDIR /tmp
