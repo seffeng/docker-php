@@ -5,12 +5,12 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 ARG BASE_DIR="/opt/websrv"
 
 ENV PHP_VERSION=php-7.1.33\
- REDIS_EXT_VERSION=redis-5.2.2\
+ REDIS_EXT_VERSION=redis-5.3.2\
  LIBICONV_VERSION=libiconv-1.16\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
- BASE_PACKAGE="gcc g++ make file autoconf patch gzip freetype-dev bzip2 curl-dev libevent-dev bison re2c openssl-dev"\
- EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev"
+ BASE_PACKAGE="gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c openssl-dev"\
+ EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -31,6 +31,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --enable-sockets\
  --enable-zip\
  --with-curl\
+ --with-freetype-dir\
  --with-gd\
  --with-iconv=/usr/local\
  --with-jpeg-dir\
