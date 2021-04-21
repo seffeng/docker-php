@@ -31,7 +31,7 @@ services:
 
   php-80:
     container_name: "php-80-alias1"
-    image: "seffeng/php"
+    image: "seffeng/php:8.0"
     networks:
       network-01:
         aliases:
