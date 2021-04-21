@@ -1,35 +1,7 @@
 version: "3.8"
 
 services:
-  php-1:
-    container_name: "php-71-alias1"
-    image: "seffeng/php:7.1"
-    networks:
-      network-01:
-        aliases:
-          - php-71-net1
-    #extra_hosts:
-    #  - "localhost:127.0.0.1"
-    volumes:
-      - "/srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
-      - "/srv/websrv/tmp:/opt/websrv/tmp"
-      - "/srv/websrv/logs/php/7.1:/opt/websrv/logs"
-
-  php-2:
-    container_name: "php-72-alias1"
-    image: "seffeng/php:7.2"
-    networks:
-      network-01:
-        aliases:
-          - php-72-net1
-    #extra_hosts:
-    #  - "localhost:127.0.0.1"
-    volumes:
-      - "/srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
-      - "/srv/websrv/tmp:/opt/websrv/tmp"
-      - "/srv/websrv/logs/php/7.2:/opt/websrv/logs"
-
-  php-3:
+  php-73:
     container_name: "php-73-alias1"
     image: "seffeng/php:7.3"
     networks:
@@ -39,11 +11,11 @@ services:
     #extra_hosts:
     #  - "localhost:127.0.0.1"
     volumes:
-      - "/srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
-      - "/srv/websrv/tmp:/opt/websrv/tmp"
-      - "/srv/websrv/logs/php/7.3:/opt/websrv/logs"
+      - "/opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
+      - "/opt/websrv/tmp:/opt/websrv/tmp"
+      - "/opt/websrv/logs/php/7.3:/opt/websrv/logs"
 
-  php-4:
+  php-74:
     container_name: "php-74-alias1"
     image: "seffeng/php:7.4"
     networks:
@@ -53,9 +25,23 @@ services:
     #extra_hosts:
     #  - "localhost:127.0.0.1"
     volumes:
-      - "/srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
-      - "/srv/websrv/tmp:/opt/websrv/tmp"
-      - "/srv/websrv/logs/php/7.4:/opt/websrv/logs"
+      - "/opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
+      - "/opt/websrv/tmp:/opt/websrv/tmp"
+      - "/opt/websrv/logs/php/7.4:/opt/websrv/logs"
+
+  php-80:
+    container_name: "php-80-alias1"
+    image: "seffeng/php"
+    networks:
+      network-01:
+        aliases:
+          - php-80-net1
+    #extra_hosts:
+    #  - "localhost:127.0.0.1"
+    volumes:
+      - "/opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
+      - "/opt/websrv/tmp:/opt/websrv/tmp"
+      - "/opt/websrv/logs/php/8.0:/opt/websrv/logs"
 
 networks:
   network-01:
