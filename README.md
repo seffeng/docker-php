@@ -2,11 +2,11 @@
 
 # 版本说明
 
-* [8.0.3](https://github.com/seffeng/docker-php/tree/8.0)
+* [8.0.6](https://github.com/seffeng/docker-php/tree/8.0)
 
-* [7.4.16](https://github.com/seffeng/docker-php/tree/7.4) , [latest](https://github.com/seffeng/docker-php)
+* [7.4.19](https://github.com/seffeng/docker-php/tree/7.4) , [latest](https://github.com/seffeng/docker-php)
 
-* [7.3.27](https://github.com/seffeng/docker-php/tree/7.3)
+* [7.3.28](https://github.com/seffeng/docker-php/tree/7.3)
 
 * [7.2.34](https://github.com/seffeng/docker-php/tree/7.2)
 
@@ -16,7 +16,7 @@
 
 ```
 alpine: ^3.13
-php: 7.4.16
+php: 7.4.19
 ```
 
 ## 常用命令：
