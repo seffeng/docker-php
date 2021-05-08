@@ -4,7 +4,7 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-7.3.27\
+ENV PHP_VERSION=php-7.3.28\
  REDIS_EXT_VERSION=redis-5.3.4\
  LIBICONV_VERSION=libiconv-1.16\
  CONFIG_DIR="${BASE_DIR}/config/php"\
@@ -54,7 +54,7 @@ RUN \
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
  apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
  mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
- addgroup wwww && adduser -H -D -G wwww www &&\
+ addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  cd ${LIBICONV_VERSION} &&\
  ./configure --prefix=/usr/local &&\
  make && make install &&\
