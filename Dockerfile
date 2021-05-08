@@ -1,4 +1,4 @@
-FROM seffeng/alpine:3.12
+FROM seffeng/alpine:latest
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
@@ -15,7 +15,7 @@ ENV PHP_VERSION=php-5.6.40\
  EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
- REDIS_EXT_URL="http://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
+ REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
  LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
  OPENSSL_URL="https://www.openssl.org/source/old/${OPENSSL_VERSION_NUM}/${OPENSSL_VERSION}.tar.gz"\
  CONFIGURE="./configure\
