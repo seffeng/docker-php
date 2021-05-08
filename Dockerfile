@@ -63,7 +63,7 @@ RUN \
  ############################################################
  apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
  mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
- addgroup wwww && adduser -H -D -G wwww www &&\
+ addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  ############################################################
  # install openssl
  ############################################################
