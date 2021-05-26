@@ -12,6 +12,8 @@
 
 * [7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
 
+* [5.6.40](https://github.com/seffeng/docker-php/tree/5.6)
+
 ## 环境
 
 ```
