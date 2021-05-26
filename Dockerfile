@@ -1,4 +1,4 @@
-FROM seffeng/alpine:latest
+FROM seffeng/alpine:3.11
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
