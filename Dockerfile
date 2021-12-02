@@ -40,7 +40,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-jpeg-dir\
  --with-mysql=mysqlnd\
  --with-mysqli=mysqlnd\
- --with-openssl\
+ --with-openssl=/usr/local\
  --with-pdo-mysql=mysqlnd\
  --with-pear\
  --with-png-dir\
