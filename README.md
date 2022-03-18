@@ -1,10 +1,15 @@
 # Docker Alpine PHP
 
+## 版本
+
+* [7.4 , 7.4.26 , latest](https://github.com/seffeng/docker-php/tree/7.4)
+* [7.3 , 7.3.33](https://github.com/seffeng/docker-php/tree/7.3)
+
 ## 环境
 
 ```
 alpine: ^3.15
-php: 8.0.13
+php: 8.0.17
 ```
 
 ## 常用命令：
