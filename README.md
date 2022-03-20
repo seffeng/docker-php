@@ -2,15 +2,13 @@
 
 ## 版本
 
-* [7.4 , 7.4.26 , latest](https://github.com/seffeng/docker-php/tree/7.4)
+* [8.1 , 8.1.4](https://github.com/seffeng/docker-php/tree/8.1)
+* [8.0 , 8.0.17](https://github.com/seffeng/docker-php/tree/8.0)
+* [7.4 , 7.4.28 , latest](https://github.com/seffeng/docker-php/tree/7.4)
 * [7.3 , 7.3.33](https://github.com/seffeng/docker-php/tree/7.3)
-
-## 环境
-
-```
-alpine: ^3.15
-php: 8.0.17
-```
+* [7.2 , 7.2.48](https://github.com/seffeng/docker-php/tree/7.2)
+* [7.1 , 7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
+* [5.6 , 5.6.40](https://github.com/seffeng/docker-php/tree/5.6)
 
 ## 常用命令：
 
