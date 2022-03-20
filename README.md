@@ -6,7 +6,7 @@
 * [8.0 , 8.0.17](https://github.com/seffeng/docker-php/tree/8.0)
 * [7.4 , 7.4.28 , latest](https://github.com/seffeng/docker-php/tree/7.4)
 * [7.3 , 7.3.33](https://github.com/seffeng/docker-php/tree/7.3)
-* [7.2 , 7.2.48](https://github.com/seffeng/docker-php/tree/7.2)
+* [7.2 , 7.2.34](https://github.com/seffeng/docker-php/tree/7.2)
 * [7.1 , 7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
 * [5.6 , 5.6.40](https://github.com/seffeng/docker-php/tree/5.6)
 
