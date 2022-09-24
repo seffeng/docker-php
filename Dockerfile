@@ -66,7 +66,7 @@ RUN \
  wget ${REDIS_EXT_URL} &&\
  wget ${LIBICONV_URL} &&\
  wget ${OPENSSL_URL} &&\
- tar -zxf ${PHP_VERSION}.tar.bz2 &&\
+ tar -jxf ${PHP_VERSION}.tar.bz2 &&\
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
  tar -zxf ${OPENSSL_VERSION}.tar.gz &&\
