@@ -9,7 +9,7 @@ ENV PHP_VERSION=php-5.6.40\
  LIBICONV_VERSION=libiconv-1.16\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
- BASE_PACKAGE="tzdata gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c perl openssl-dev"\
+ BASE_PACKAGE="wget tzdata gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c perl openssl-dev"\
  EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
  
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
@@ -47,12 +47,6 @@ WORKDIR /tmp
 COPY    conf ./conf
 
 RUN \
- wget ${PHP_URL} &&\
- wget ${REDIS_EXT_URL} &&\
- wget ${LIBICONV_URL} &&\
- tar -jxf ${PHP_VERSION}.tar.bz2 &&\
- tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
- tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
  ############################################################
  # apk add
  ############################################################
@@ -62,6 +56,15 @@ RUN \
  echo 'Asia/Shanghai' > /etc/timezone &&\
  mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
  addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
+ ############################################################
+ # download files
+ ############################################################
+ wget ${PHP_URL} &&\
+ wget ${REDIS_EXT_URL} &&\
+ wget ${LIBICONV_URL} &&\
+ tar -jxf ${PHP_VERSION}.tar.bz2 &&\
+ tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
+ tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
  ############################################################
  # install libiconv
  ############################################################
