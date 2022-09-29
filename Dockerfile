@@ -4,9 +4,9 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV PHP_VERSION=php-8.1.8\
+ENV PHP_VERSION=php-8.1.10\
  REDIS_EXT_VERSION=redis-5.3.7\
- LIBICONV_VERSION=libiconv-1.16\
+ LIBICONV_VERSION=libiconv-1.17\
  CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR=${BASE_DIR}/program/php\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev"\
