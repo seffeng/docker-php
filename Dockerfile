@@ -3,18 +3,20 @@ FROM seffeng/alpine:latest
 MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
+ARG PHP_VERSION="php-8.0.24"
+ARG REDIS_EXT_VERSION="redis-5.3.7"
+ARG LIBICONV_VERSION="libiconv-1.17"
+ARG OPENSSL_VERSION="openssl-1.1.1q"
 
-ENV PHP_VERSION=php-8.0.21\
- REDIS_EXT_VERSION=redis-5.3.7\
- LIBICONV_VERSION=libiconv-1.16\
- CONFIG_DIR="${BASE_DIR}/config/php"\
- INSTALL_DIR=${BASE_DIR}/program/php\
- BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev"\
- EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
- 
+ENV CONFIG_DIR="${BASE_DIR}/config/php"\
+ INSTALL_DIR="${BASE_DIR}/program/php"\
+ BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
+ EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
+
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
  LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
+ OPENSSL_URL="https://www.openssl.org/source/${OPENSSL_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --prefix=${INSTALL_DIR}\
  --enable-fpm\
@@ -33,6 +35,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-bz2\
  --with-curl\
  --with-freetype\
+ --with-gmp\
  --with-iconv=/usr/local\
  --with-jpeg\
  --with-mysqli=mysqlnd\
@@ -46,12 +49,17 @@ WORKDIR /tmp
 COPY    conf ./conf
 
 RUN \
+ ############################################################
+ # download files
+ ############################################################
  wget ${PHP_URL} &&\
  wget ${REDIS_EXT_URL} &&\
  wget ${LIBICONV_URL} &&\
+ wget ${OPENSSL_URL} &&\
  tar -jxf ${PHP_VERSION}.tar.bz2 &&\
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
+ tar -zxf ${OPENSSL_VERSION}.tar.gz &&\
  ############################################################
  # apk add
  ############################################################
@@ -59,9 +67,18 @@ RUN \
  mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
  addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  ############################################################
+ # install openssl
+ ############################################################
+ cd /tmp/${OPENSSL_VERSION} &&\
+ ./config --prefix=${BASE_DIR}/program/openssl &&\
+ make && make install &&\
+ cp -R ${BASE_DIR}/program/openssl/lib/* /usr/local/lib/ &&\
+ make uninstall &&\
+ rm -rf ${BASE_DIR}/program/openssl &&\
+ ############################################################
  # install libiconv
  ############################################################
- cd ${LIBICONV_VERSION} &&\
+ cd /tmp/${LIBICONV_VERSION} &&\
  ./configure --prefix=/usr/local &&\
  make && make install &&\
  if [ -f /usr/bin/iconv ] ; then (rm -rf /usr/bin/iconv) fi &&\
