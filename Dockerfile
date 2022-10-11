@@ -2,14 +2,14 @@ FROM seffeng/alpine:latest
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
-ARG BASE_DIR="/opt/websrv"\
- PHP_VERSION=php-7.4.32\
- REDIS_EXT_VERSION=redis-5.3.7\
- LIBICONV_VERSION=libiconv-1.17\
- OPENSSL_VERSION=openssl-1.1.1q
+ARG BASE_DIR="/opt/websrv"
+ARG PHP_VERSION="php-7.4.32"
+ARG REDIS_EXT_VERSION="redis-5.3.7"
+ARG LIBICONV_VERSION="libiconv-1.17"
+ARG OPENSSL_VERSION="openssl-1.1.1q"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
- INSTALL_DIR=${BASE_DIR}/program/php\
+ INSTALL_DIR="${BASE_DIR}/program/php"\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
  EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
 
