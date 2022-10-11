@@ -2,10 +2,10 @@ FROM seffeng/alpine:latest
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
-ARG BASE_DIR="/opt/websrv"
+ARG BASE_DIR="/opt/websrv"\
 ARG PHP_VERSION="php-8.1.11"\
-ARG REDIS_EXT_VERSION="redis-5.3.7"
-ARG LIBICONV_VERSION="libiconv-1.17"
+ARG REDIS_EXT_VERSION="redis-5.3.7"\
+ARG LIBICONV_VERSION="libiconv-1.17"\
 ARG OPENSSL_VERSION="openssl-1.1.1q"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
