@@ -9,7 +9,7 @@ ARG LIBICONV_VERSION="libiconv-1.17"
 ARG OPENSSL_VERSION="openssl-1.1.1q"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
- INSTALL_DIR=${BASE_DIR}/program/php\
+ INSTALL_DIR="${BASE_DIR}/program/php"\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
  EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
 
