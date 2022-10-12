@@ -3,18 +3,20 @@ FROM seffeng/alpine:latest
 MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
+ARG PHP_VERSION="php-7.2.34"
+ARG REDIS_EXT_VERSION="redis-5.3.7"
+ARG LIBICONV_VERSION="libiconv-1.17"
+ARG OPENSSL_VERSION="openssl-1.1.1q"
 
-ENV PHP_VERSION=php-7.2.34\
- REDIS_EXT_VERSION=redis-5.3.7\
- LIBICONV_VERSION=libiconv-1.16\
- CONFIG_DIR="${BASE_DIR}/config/php"\
- INSTALL_DIR=${BASE_DIR}/program/php\
- BASE_PACKAGE="gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c openssl-dev"\
- EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
- 
+ENV CONFIG_DIR="${BASE_DIR}/config/php"\
+ INSTALL_DIR="${BASE_DIR}/program/php"\
+ BASE_PACKAGE="gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
+ EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
+
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
  LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
+ OPENSSL_URL="https://www.openssl.org/source/${OPENSSL_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --prefix=${INSTALL_DIR}\
  --enable-fpm\
@@ -33,6 +35,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-curl\
  --with-freetype-dir\
  --with-gd\
+ --with-gmp\
  --with-iconv=/usr/local\
  --with-jpeg-dir\
  --with-mysqli=mysqlnd\
@@ -46,20 +49,43 @@ WORKDIR /tmp
 COPY    conf ./conf
 
 RUN \
+ ############################################################
+ # download files
+ ############################################################
  wget ${PHP_URL} &&\
  wget ${REDIS_EXT_URL} &&\
  wget ${LIBICONV_URL} &&\
+ wget ${OPENSSL_URL} &&\
  tar -jxf ${PHP_VERSION}.tar.bz2 &&\
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
+ tar -zxf ${OPENSSL_VERSION}.tar.gz &&\
+ ############################################################
+ # apk add
+ ############################################################
  apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
  mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
  addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
- cd ${LIBICONV_VERSION} &&\
+ ############################################################
+ # install openssl
+ ############################################################
+ cd /tmp/${OPENSSL_VERSION} &&\
+ ./config --prefix=${BASE_DIR}/program/openssl &&\
+ make && make install &&\
+ cp -R ${BASE_DIR}/program/openssl/lib/* /usr/local/lib/ &&\
+ make uninstall &&\
+ rm -rf ${BASE_DIR}/program/openssl &&\
+ ############################################################
+ # install libiconv
+ ############################################################
+ cd /tmp/${LIBICONV_VERSION} &&\
  ./configure --prefix=/usr/local &&\
  make && make install &&\
  if [ -f /usr/bin/iconv ] ; then (rm -rf /usr/bin/iconv) fi &&\
  ln -s /usr/local/bin/iconv /usr/bin/iconv &&\
+ ############################################################
+ # install php
+ ############################################################
  cd /tmp/${PHP_VERSION} &&\
  ${CONFIGURE} &&\
  make && make install &&\
@@ -71,11 +97,15 @@ RUN \
  echo -e "#/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
  chmod +x ${CONFIG_DIR}/start.sh ${CONFIG_DIR}/stop.sh ${CONFIG_DIR}/reload.sh &&\
  ln -s ${CONFIG_DIR}/start.sh /usr/bin/php-fpm &&\
+ ############################################################
+ # install redis ext
+ ############################################################
  cd /tmp/${REDIS_EXT_VERSION} &&\
  ${INSTALL_DIR}/bin/phpize &&\
  ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
  make && make install &&\
  echo -e "; redis extension ;\nextension=redis" > ${CONFIG_DIR}/conf.d/redis.ini &&\
+ ############################################################
  cd /tmp && apk del ${BASE_PACKAGE} &&\
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
