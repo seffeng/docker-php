@@ -10,7 +10,7 @@ ARG OPENSSL_VERSION="openssl-1.1.1q"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR="${BASE_DIR}/program/php"\
- BASE_PACKAGE="gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
+ BASE_PACKAGE="wget gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
  EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
 
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
@@ -50,6 +50,12 @@ COPY    conf ./conf
 
 RUN \
  ############################################################
+ # apk add
+ ############################################################
+ apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
+ mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
+ addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
+ ############################################################
  # download files
  ############################################################
  wget ${PHP_URL} &&\
@@ -60,12 +66,6 @@ RUN \
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
  tar -zxf ${OPENSSL_VERSION}.tar.gz &&\
- ############################################################
- # apk add
- ############################################################
- apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
- mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
- addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  ############################################################
  # install openssl
  ############################################################
@@ -110,6 +110,6 @@ RUN \
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
-VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/wwwroot", "${BASE_DIR}/logs"]
+VOLUME ["${BASE_DIR}/logs"]
 
 CMD ["php-fpm", "-F"]
