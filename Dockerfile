@@ -1,19 +1,19 @@
 FROM alpine:3.10
 
-MAINTAINER  seffeng "seffeng@sina.cn"
+LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
+ARG PHP_VERSION="php-5.6.40"
+ARG REDIS_EXT_VERSION="redis-4.3.0"
+ARG LIBICONV_VERSION="libiconv-1.17"
+ARG OPENSSL_VERSION_NUM="1.0.2"
 
-ENV PHP_VERSION=php-5.6.40\
- REDIS_EXT_VERSION=redis-4.3.0\
- LIBICONV_VERSION=libiconv-1.16\
- OPENSSL_VERSION_NUM=1.0.2\
- OPENSSL_VERSION=openssl-1.0.2u\
+ENV OPENSSL_VERSION="openssl-${OPENSSL_VERSION_NUM}u"\
  CONFIG_DIR="${BASE_DIR}/config/php"\
- INSTALL_DIR=${BASE_DIR}/program/php\
+ INSTALL_DIR="${BASE_DIR}/program/php"\
  BASE_PACKAGE="wget tzdata gcc g++ make file autoconf patch gzip bzip2 curl-dev libevent-dev bison re2c perl"\
  EXTEND="libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libzip-dev freetype-dev"
- 
+
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
  LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
@@ -111,6 +111,6 @@ RUN \
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
-VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/wwwroot", "${BASE_DIR}/logs"]
+VOLUME ["${BASE_DIR}/logs"]
 
 CMD ["php-fpm", "-F"]
