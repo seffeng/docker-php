@@ -1,6 +1,6 @@
 FROM seffeng/alpine:latest
 
-MAINTAINER  seffeng "seffeng@sina.cn"
+LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
 ARG PHP_VERSION="php-8.1.11"
@@ -50,6 +50,12 @@ COPY    conf ./conf
 
 RUN \
  ############################################################
+ # apk add
+ ############################################################
+ apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
+ mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
+ addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
+ ############################################################
  # download files
  ############################################################
  wget ${PHP_URL} &&\
@@ -60,12 +66,6 @@ RUN \
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
  tar -zxf ${OPENSSL_VERSION}.tar.gz &&\
- ############################################################
- # apk add
- ############################################################
- apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
- mkdir -p ${BASE_DIR}/data/wwwroot ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/conf.d &&\
- addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  ############################################################
  # install openssl
  ############################################################
@@ -110,6 +110,6 @@ RUN \
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
-VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/wwwroot", "${BASE_DIR}/logs"]
+VOLUME ["${BASE_DIR}/logs"]
 
 CMD ["php-fpm", "-F"]
