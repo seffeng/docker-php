@@ -2,7 +2,7 @@
 
 ## 版本
 
-* [7.4 , 7.4.32](https://github.com/seffeng/docker-php/tree/7.4)
+* [7.4 , 7.4.33](https://github.com/seffeng/docker-php/tree/7.4)
 
 ## 常用命令：
 
