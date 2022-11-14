@@ -11,7 +11,7 @@ ARG OPENSSL_VERSION="openssl-1.1.1s"
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR="${BASE_DIR}/program/php"\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
- EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
+ EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libwebp-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
 
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -42,6 +42,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
  --with-pear\
+ --with-webp\
  --with-zip\
  --with-zlib"
 
