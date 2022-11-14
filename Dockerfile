@@ -42,6 +42,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
  --with-pear\
+ --with-webp\
  --with-zip\
  --with-zlib"
 
