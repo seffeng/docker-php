@@ -14,7 +14,7 @@ $ docker pull seffeng/php:8.1
 $ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
 
 # 完整示例，可参考备注 ：
-$ docker run --name php-80-alias1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.1:/opt/websrv/logs seffeng/php:8.1
+$ docker run --name php-81-alias1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.1:/opt/websrv/logs seffeng/php:8.1
 
 # 查看正在运行的容器
 $ docker ps
@@ -62,6 +62,6 @@ $ docker network create [NAME]
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name php-80-alias1 --network network-01 --network-alias php-80-net1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.1:/opt/websrv/logs seffeng/php:8.1
+$ docker run --name php-81-alias1 --network network-01 --network-alias php-81-net1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.1:/opt/websrv/logs seffeng/php:8.1
 ```
 
