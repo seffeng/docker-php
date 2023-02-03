@@ -1,9 +1,9 @@
 # Docker Alpine PHP
 
 # 版本
-* [8.2 , 8.2.0](https://github.com/seffeng/docker-php/tree/8.2)
-* [8.1 , 8.1.13 , latest](https://github.com/seffeng/docker-php/tree/8.1)
-* [8.0 , 8.0.26](https://github.com/seffeng/docker-php/tree/8.0)
+* [8.2 , 8.2.2](https://github.com/seffeng/docker-php/tree/8.2)
+* [8.1 , 8.1.15 , latest](https://github.com/seffeng/docker-php/tree/8.1)
+* [8.0 , 8.0.28](https://github.com/seffeng/docker-php/tree/8.0)
 * [7.4 , 7.4.33](https://github.com/seffeng/docker-php/tree/7.4)
 * [7.3 , 7.3.33](https://github.com/seffeng/docker-php/tree/7.3)
 * [7.2 , 7.2.34](https://github.com/seffeng/docker-php/tree/7.2)
