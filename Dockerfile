@@ -3,7 +3,7 @@ FROM seffeng/alpine:3.17
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.2.0"
+ARG PHP_VERSION="php-8.2.2"
 ARG REDIS_EXT_VERSION="redis-5.3.7"
 ARG LIBICONV_VERSION="libiconv-1.17"
 ARG OPENSSL_VERSION="openssl-3.0.7"
