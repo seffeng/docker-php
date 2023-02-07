@@ -73,7 +73,7 @@ RUN \
  cd /tmp/${OPENSSL_VERSION} &&\
  ./config --prefix=${BASE_DIR}/program/openssl &&\
  make && make install &&\
- cp -R ${BASE_DIR}/program/openssl/lib/* /usr/local/lib/ &&\
+ cp -R ${BASE_DIR}/program/openssl/lib64/* /usr/local/lib/ &&\
  make uninstall &&\
  rm -rf ${BASE_DIR}/program/openssl &&\
  ############################################################
