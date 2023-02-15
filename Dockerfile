@@ -3,10 +3,10 @@ FROM seffeng/alpine:3.17
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.1.15"
+ARG PHP_VERSION="php-8.1.16"
 ARG REDIS_EXT_VERSION="redis-5.3.7"
 ARG LIBICONV_VERSION="libiconv-1.17"
-ARG OPENSSL_VERSION="openssl-3.0.7"
+ARG OPENSSL_VERSION="openssl-3.0.8"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR="${BASE_DIR}/program/php"\
@@ -92,6 +92,7 @@ RUN \
  make && make install &&\
  ln -s ${INSTALL_DIR}/bin/php /usr/bin/php &&\
  ln -s ${INSTALL_DIR}/bin/phpize /usr/bin/phpize &&\
+ ln -s ${INSTALL_DIR}/bin/pecl /usr/bin/pecl &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
  echo -e "#!/bin/sh\n${INSTALL_DIR}/sbin/php-fpm -y ${CONFIG_DIR}/php-fpm.conf \$1" > ${CONFIG_DIR}/start.sh &&\
  echo -e "#/bin/sh/\nkill -INT  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
