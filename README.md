@@ -2,7 +2,7 @@
 
 ## 版本
 
-* [8.2 , 8.2.3](https://github.com/seffeng/docker-php/tree/8.2)
+* [8.2 , 8.2.5](https://github.com/seffeng/docker-php/tree/8.2)
 
 ## 常用命令：
 
