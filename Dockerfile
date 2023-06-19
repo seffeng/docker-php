@@ -95,8 +95,8 @@ RUN \
  ln -s ${INSTALL_DIR}/bin/pecl /usr/bin/pecl &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
  echo -e "#!/bin/sh\n${INSTALL_DIR}/sbin/php-fpm -y ${CONFIG_DIR}/php-fpm.conf \$1" > ${CONFIG_DIR}/start.sh &&\
- echo -e "#/bin/sh/\nkill -INT  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
- echo -e "#/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
+ echo -e "#!/bin/sh/\nkill -INT  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/stop.sh &&\
+ echo -e "#!/bin/sh/\nkill -USR2  \`cat ${BASE_DIR}/tmp/php-fpm.pid\`" > ${CONFIG_DIR}/reload.sh &&\
  chmod +x ${CONFIG_DIR}/start.sh ${CONFIG_DIR}/stop.sh ${CONFIG_DIR}/reload.sh &&\
  ln -s ${CONFIG_DIR}/start.sh /usr/bin/php-fpm &&\
  ############################################################
