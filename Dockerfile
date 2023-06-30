@@ -3,10 +3,10 @@ FROM seffeng/alpine:3.17
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.2.5"
+ARG PHP_VERSION="php-8.2.8"
 ARG REDIS_EXT_VERSION="redis-5.3.7"
 ARG LIBICONV_VERSION="libiconv-1.17"
-ARG OPENSSL_VERSION="openssl-3.1.0"
+ARG OPENSSL_VERSION="openssl-3.1.1"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR="${BASE_DIR}/program/php"\
