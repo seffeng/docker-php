@@ -2,19 +2,19 @@
 
 ## 版本
 
-* [8.2 , 8.2.13](https://github.com/seffeng/docker-php/tree/8.2)
+* [8.3 , 8.3.0](https://github.com/seffeng/docker-php/tree/8.3)
 
 ## 常用命令：
 
 ```sh
 # 拉取镜像
-$ docker pull seffeng/php:8.2
+$ docker pull seffeng/php:8.3
 
 # 运行；若配合 nginx 使用，注意 <html-dir> 和 <tmp-dir> 与 nginx 一致
 $ docker run --name php-test -d -v <html-dir>:/opt/websrv/data/wwwroot -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/php
 
 # 完整示例，可参考备注 ：
-$ docker run --name php-82-alias1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.2:/opt/websrv/logs seffeng/php:8.2
+$ docker run --name php-83-alias1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.3:/opt/websrv/logs seffeng/php:8.3
 
 # 查看正在运行的容器
 $ docker ps
@@ -62,6 +62,6 @@ $ docker network create [NAME]
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name php-82-alias1 --network network-01 --network-alias php-82-net1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.2:/opt/websrv/logs seffeng/php:8.2
+$ docker run --name php-83-alias1 --network network-01 --network-alias php-83-net1 -d -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/php/8.3:/opt/websrv/logs seffeng/php:8.3
 ```
 

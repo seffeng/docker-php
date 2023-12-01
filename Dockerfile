@@ -3,10 +3,9 @@ FROM seffeng/alpine:3.18
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.2.13"
+ARG PHP_VERSION="php-8.3.0"
 ARG REDIS_EXT_VERSION="redis-6.0.2"
 ARG LIBICONV_VERSION="libiconv-1.17"
-ARG OPENSSL_VERSION="openssl-3.0.12"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR="${BASE_DIR}/program/php"\
@@ -16,7 +15,6 @@ ENV CONFIG_DIR="${BASE_DIR}/config/php"\
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
  LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
- OPENSSL_URL="https://www.openssl.org/source/${OPENSSL_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --prefix=${INSTALL_DIR}\
  --enable-fpm\
@@ -41,7 +39,6 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-mysqli=mysqlnd\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
- --with-pear\
  --with-webp\
  --with-zip\
  --with-zlib"
@@ -62,20 +59,9 @@ RUN \
  wget ${PHP_URL} &&\
  wget ${REDIS_EXT_URL} &&\
  wget ${LIBICONV_URL} &&\
- wget ${OPENSSL_URL} &&\
  tar -jxf ${PHP_VERSION}.tar.bz2 &&\
  tar -zxf ${REDIS_EXT_VERSION}.tgz &&\
  tar -zxf ${LIBICONV_VERSION}.tar.gz &&\
- tar -zxf ${OPENSSL_VERSION}.tar.gz &&\
- ############################################################
- # install openssl
- ############################################################
- cd /tmp/${OPENSSL_VERSION} &&\
- ./config --prefix=${BASE_DIR}/program/openssl &&\
- make && make install &&\
- cp -R ${BASE_DIR}/program/openssl/lib64/* /usr/local/lib/ &&\
- make uninstall &&\
- rm -rf ${BASE_DIR}/program/openssl &&\
  ############################################################
  # install libiconv
  ############################################################
