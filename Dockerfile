@@ -1,9 +1,9 @@
-FROM seffeng/alpine:3.18
+FROM seffeng/alpine:3.19
 
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.3.0"
+ARG PHP_VERSION="php-8.3.3"
 ARG REDIS_EXT_VERSION="redis-6.0.2"
 ARG LIBICONV_VERSION="libiconv-1.17"
 
@@ -39,6 +39,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-mysqli=mysqlnd\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
+ --with-pear\
  --with-webp\
  --with-zip\
  --with-zlib"
