@@ -1,16 +1,16 @@
-FROM seffeng/alpine:3.19
+FROM seffeng/alpine:3.21
 
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.3.8"
-ARG REDIS_EXT_VERSION="redis-6.0.2"
-ARG LIBICONV_VERSION="libiconv-1.17"
+ARG PHP_VERSION="php-8.4.3"
+ARG REDIS_EXT_VERSION="redis-6.1.0"
+ARG LIBICONV_VERSION="libiconv-1.18"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
  INSTALL_DIR="${BASE_DIR}/program/php"\
  BASE_PACKAGE="gcc g++ make file autoconf patch gzip curl-dev libevent-dev bison re2c openssl-dev linux-headers"\
- EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libwebp-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev freetype-dev"
+ EXTEND="gmp-dev libcurl libxml2-dev libjpeg-turbo-dev libpng-dev libwebp-dev sqlite-dev oniguruma-dev bzip2-dev libzip-dev libpq-dev freetype-dev"
 
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
@@ -39,6 +39,7 @@ ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  --with-mysqli=mysqlnd\
  --with-openssl\
  --with-pdo-mysql=mysqlnd\
+ --with-pdo-pgsql\
  --with-pear\
  --with-webp\
  --with-zip\
