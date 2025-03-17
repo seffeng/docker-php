@@ -2,10 +2,10 @@
 
 # 版本
 
-* [8.4 , 8.4.3](https://github.com/seffeng/docker-php/tree/8.4)
-* [8.3 , 8.3.8 , latest](https://github.com/seffeng/docker-php/tree/8.3)
-* [8.2 , 8.2.18](https://github.com/seffeng/docker-php/tree/8.2)
-* [8.1 , 8.1.28](https://github.com/seffeng/docker-php/tree/8.1)
+* [8.4 , 8.4.5](https://github.com/seffeng/docker-php/tree/8.4)
+* [8.3 , 8.3.19 , latest](https://github.com/seffeng/docker-php/tree/8.3)
+* [8.2 , 8.2.28](https://github.com/seffeng/docker-php/tree/8.2)
+* [8.1 , 8.1.32](https://github.com/seffeng/docker-php/tree/8.1)
 * [8.0 , 8.0.30](https://github.com/seffeng/docker-php/tree/8.0)
 * [7.4 , 7.4.33](https://github.com/seffeng/docker-php/tree/7.4)
 * [7.3 , 7.3.33](https://github.com/seffeng/docker-php/tree/7.3)
