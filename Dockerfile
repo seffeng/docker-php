@@ -14,7 +14,7 @@ ENV CONFIG_DIR="${BASE_DIR}/config/php"\
 
 ENV PHP_URL="https://www.php.net/distributions/${PHP_VERSION}.tar.bz2"\
  REDIS_EXT_URL="https://pecl.php.net/get/${REDIS_EXT_VERSION}.tgz"\
- LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
+ LIBICONV_URL="https://mirrors.hust.edu.cn/gnu/libiconv/${LIBICONV_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --prefix=${INSTALL_DIR}\
  --enable-fpm\
