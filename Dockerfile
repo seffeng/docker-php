@@ -1,10 +1,10 @@
-FROM seffeng/alpine:3.21
+FROM seffeng/alpine:3.22
 
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG PHP_VERSION="php-8.4.15"
-ARG REDIS_EXT_VERSION="redis-6.2.0"
+ARG PHP_VERSION="php-8.5.0"
+ARG REDIS_EXT_VERSION="redis-6.3.0"
 ARG LIBICONV_VERSION="libiconv-1.18"
 
 ENV CONFIG_DIR="${BASE_DIR}/config/php"\
