@@ -1,0 +1,21 @@
+FROM php:8.5-ext AS extension-php
+
+RUN rm -rf /opt/websrv/program/php/bin/phpdbg /opt/websrv/program/php/bin/php-cgi &&\
+ rm -rf /tmp/*
+
+FROM seffeng/alpine:3.24
+
+COPY --from=extension-php / /
+
+ARG BASE_DIR="/opt/websrv"
+
+WORKDIR /tmp
+
+RUN \
+ wget https://getcomposer.org/installer &&\
+ /usr/bin/php ./installer --install-dir=/usr/bin --filename=composer &&\
+ rm -rf /tmp/*
+
+VOLUME ["${BASE_DIR}/logs"]
+
+CMD ["php-fpm", "-F"]

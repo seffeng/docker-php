@@ -1,0 +1,15 @@
+FROM php:8.5-ext-slim
+
+ENV EXTEND="supervisor"
+
+WORKDIR /tmp
+COPY    conf ./conf
+
+RUN apk update && apk add --no-cache ${EXTEND} &&\
+ mkdir -p /etc/supervisor.d/ && cp -Rf /tmp/conf/supervisor/* /etc/supervisor.d/ &&\
+ sed -i 's/;nodaemon=false/nodaemon=true/' /etc/supervisord.conf &&\
+ cd /tmp &&\
+ rm -rf /var/cache/apk/* &&\
+ rm -rf /tmp/*
+
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]

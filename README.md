@@ -14,6 +14,22 @@
 * [7.1 , 7.1.33](https://github.com/seffeng/docker-php/tree/7.1)
 * [5.6 , 5.6.40](https://github.com/seffeng/docker-php/tree/5.6)
 
+## Dockerfile 说明
+
+```shell
+# Dockerfile.Extension
+## 增加扩展，在 php:8.5 镜像基础上生成 php:8.5-ext 镜像
+
+# Dockerfile.Slim
+## 精简镜像，在 php:8.5-ext 镜像基础上生成 php:8.5-ext-slim 镜像
+
+# Dockerfile.Supervisor
+## 增加 supervisor，在 php:8.5-ext-slim 镜像基础上生成 php-supervisor:8.5-ext-slim 镜像
+
+# Dockerfile.Nginx
+## 增加 nginx，在 nginx:1.30 和 php-supervisor:8.5-ext-slim 镜像基础上生成 nginx-php:1.30-8.5 镜像
+```
+
 ## 常用命令：
 
 ```sh

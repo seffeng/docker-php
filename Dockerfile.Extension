@@ -1,0 +1,67 @@
+FROM seffeng/php:8.5
+
+ARG SWOOLE_EXT_VERSION="swoole-6.2.3"\
+ IMAGICK_EXT_VERSION="imagick-3.8.1"\
+ GRPC_EXT_VERSION="grpc-1.84.0"\
+ PROTOBUF_EXT_VERSION="protobuf-5.36.2"\
+ BASE_PACKAGE="gcc g++ make file autoconf linux-headers"\
+ EXTEND="jpegoptim optipng pngquant gifsicle libwebp-tools imagemagick imagemagick-dev libevent-dev re2c"
+
+ENV SWOOLE_EXT_URL="https://pecl.php.net/get/${SWOOLE_EXT_VERSION}.tgz"\
+ IMAGICK_EXT_URL="https://pecl.php.net/get/${IMAGICK_EXT_VERSION}.tgz"\
+ GRPC_EXT_URL="https://pecl.php.net/get/${GRPC_EXT_VERSION}.tgz"\
+ PROTOBUF_EXT_URL="https://pecl.php.net/get/${PROTOBUF_EXT_VERSION}.tgz"
+
+WORKDIR /tmp
+
+RUN apk update && apk add --no-cache ${BASE_PACKAGE} ${EXTEND} &&\
+ ##########################################################
+ #      INSTALL SWOOLE EXTENSION                          #
+ ##########################################################
+ cd /tmp &&\
+ wget ${SWOOLE_EXT_URL} &&\
+ tar -zxf ${SWOOLE_EXT_VERSION}.tgz &&\
+ cd /tmp/${SWOOLE_EXT_VERSION} &&\
+ ${INSTALL_DIR}/bin/phpize &&\
+ ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
+ make && make install &&\
+ echo -e "; swoole extension ;\nextension=swoole" > ${CONFIG_DIR}/conf.d/swoole.ini &&\
+ ##########################################################
+ #      INSTALL IMAGICK EXTENSION                         #
+ ##########################################################
+ cd /tmp &&\
+ wget ${IMAGICK_EXT_URL} &&\
+ tar -zxf ${IMAGICK_EXT_VERSION}.tgz &&\
+ cd /tmp/${IMAGICK_EXT_VERSION} &&\
+ ${INSTALL_DIR}/bin/phpize &&\
+ ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
+ make && make install &&\
+ echo -e "; imagick extension ;\nextension=imagick" > ${CONFIG_DIR}/conf.d/imagick.ini &&\
+ ##########################################################
+ #      INSTALL GRPC EXTENSION                            #
+ ##########################################################
+ cd /tmp &&\
+ wget ${GRPC_EXT_URL} &&\
+ tar -zxf ${GRPC_EXT_VERSION}.tgz &&\
+ cd /tmp/${GRPC_EXT_VERSION} &&\
+ ${INSTALL_DIR}/bin/phpize &&\
+ ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
+ make && make install &&\
+ echo -e "; grpc extension ;\nextension=grpc" > ${CONFIG_DIR}/conf.d/grpc.ini &&\
+ ##########################################################
+ #      INSTALL PROTOBUF EXTENSION                        #
+ ##########################################################
+ cd /tmp &&\
+ wget ${PROTOBUF_EXT_URL} &&\
+ tar -zxf ${PROTOBUF_EXT_VERSION}.tgz &&\
+ cd /tmp/${PROTOBUF_EXT_VERSION} &&\
+ ${INSTALL_DIR}/bin/phpize &&\
+ ./configure --with-php-config=${INSTALL_DIR}/bin/php-config &&\
+ make && make install &&\
+ echo -e "; protobuf extension ;\nextension=protobuf" > ${CONFIG_DIR}/conf.d/protobuf.ini &&\
+ ##########################################################
+ cd /tmp && apk del ${BASE_PACKAGE} &&\
+ rm -rf /var/cache/apk/* &&\
+ rm -rf /tmp/*
+
+CMD ["php-fpm", "-F"]
