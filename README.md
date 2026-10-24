@@ -28,6 +28,14 @@
 
 # Dockerfile.Nginx
 ## 增加 nginx，在 nginx:1.30 和 php-supervisor:8.5-ext-slim 镜像基础上生成 nginx-php:1.30-8.5 镜像
+
+# 注意，仓库推送时报错（error from registry: unknown manifest class for application/vnd.oci.empty.v1+json）
+## 原因1：Registry 版本过旧或不支持 OCI Artifacts；
+## 原因2：客户端工具与 Registry 的兼容性问题
+## 修改参数，以非 OCI 方式进行构建
+$ set DOCKER_BUILDKIT=1
+$ set BUILDX_NO_DEFAULT_ATTESTATIONS=1
+$ docker build --output type=image,name=myimage,oci-mediatypes=false -t [IMAGE NAME] .
 ```
 
 ## 常用命令：
